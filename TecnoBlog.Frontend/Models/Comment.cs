@@ -5,13 +5,14 @@ using System.Web;
 
 namespace TecnoBlog.Models
 {
-    public class Article
+    public class Comment
     {
         public Guid Id { get; set; }
-        public string Author { get; set; }
+        public Guid ArticleId { get; set; }
+        public string UserName { get; set; }
         public DateTime Created { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
         public string Content { get; set; }
     }
+
+
 }

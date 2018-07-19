@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using TecnoBlog.Frontend.Models;
+using TecnoBlog.Models;
 
-namespace TecnoBlog.Frontend.Controllers
+namespace TecnoBlog.Controllers
 {
     [Authorize]
     public class ManageController : Controller
