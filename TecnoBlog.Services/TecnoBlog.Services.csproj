@@ -48,7 +48,6 @@
     <Compile Include="Converters\ImageConverter.cs" />
     <Compile Include="Converters\TagConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
-    <Compile Include="ImageRepository.cs" />
     <Compile Include="Impl\ArticleService.cs" />
     <Compile Include="Impl\CommentService.cs" />
     <Compile Include="Impl\ImageService.cs" />
@@ -60,13 +59,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="TagRepository.cs" />
     <Compile Include="TecnoBlog.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TecnoBlog.dbml</DependentUpon>
     </Compile>
-    <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
