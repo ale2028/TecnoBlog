@@ -7,7 +7,7 @@ using TecnoBlog.Business.Models;
 
 namespace TecnoBlog.Services.Converters
 {
-    class UserConverter
+    public class UserConverter
     {
         public static Services.AspNetUsers Convert(Business.Models.User origin)
         {

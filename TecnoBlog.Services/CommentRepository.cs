@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TecnoBlog.Entities;
 
 namespace TecnoBlog.Repositories
 {
     public class CommentRepository
     {
-
+        /*
         /// <summary>
         /// Devolver una lista de comentarios buscando un articulo 
         /// </summary>
@@ -39,6 +38,6 @@ namespace TecnoBlog.Repositories
             } // CATCH ENDS
             return results;
         } // METHOD GET COMMENTS ------------------------------------------------------------------
-     
+     */
     }
 } 

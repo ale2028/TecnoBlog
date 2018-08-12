@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TecnoBlog.Entities;
-using TecnoBlog.Models;
 
 namespace TecnoBlog.Reposirories
 {
@@ -14,7 +12,7 @@ namespace TecnoBlog.Reposirories
         /// REciben un id user y retornan una lista de artiulos
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Models.Article> GetArticlesByAuthor(string userId)
+        /*public IEnumerable<Models.Article> GetArticlesByAuthor(string userId)
         {
             // La lista de articulos
             List<Models.Article> results = new List<Models.Article>();
@@ -71,7 +69,7 @@ namespace TecnoBlog.Reposirories
                 Console.WriteLine(e.Message);
             } // CATCH ENDS
             return results;
-        } // METHOD GET ARTICLES ------------------------------------------------------------------
+        } // METHOD GET ARTICLES ------------------------------------------------------------------*/
 
     }
 }

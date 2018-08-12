@@ -7,7 +7,7 @@ using TecnoBlog.Business.Models;
 
 namespace TecnoBlog.Services.Converters
 {
-    class ArticleConverter
+    public class ArticleConverter
     {
         /// <summary>
         /// 

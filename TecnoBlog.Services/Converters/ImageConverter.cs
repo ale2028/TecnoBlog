@@ -7,7 +7,7 @@ using TecnoBlog.Business.Models;
 
 namespace TecnoBlog.Services.Converters
 {
-    class ImageConverter
+    public class ImageConverter
     {
         public static Services.Image Convert(Business.Models.Image origin)
         {

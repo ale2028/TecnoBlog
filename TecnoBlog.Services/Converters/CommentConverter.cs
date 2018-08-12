@@ -7,7 +7,7 @@ using TecnoBlog.Business.Models;
 
 namespace TecnoBlog.Services.Converters
 {
-    class CommentConverter
+    public class CommentConverter
     {
         public static Services.Comment Convert(Business.Models.Comment origin)
         {
