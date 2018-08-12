@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace TecnoBlog.Frontend.Controllers
+namespace TecnoBlog.Controllers
 {
     public class HomeController : Controller
     {

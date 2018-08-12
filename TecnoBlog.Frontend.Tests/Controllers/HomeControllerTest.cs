@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TecnoBlog.Frontend;
-using TecnoBlog.Frontend.Controllers;
+using TecnoBlog;
+using TecnoBlog.Controllers;
 
-namespace TecnoBlog.Frontend.Tests.Controllers
+namespace TecnoBlog.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using TecnoBlog.Frontend.Models;
+using TecnoBlog.Models;
 
-namespace TecnoBlog.Frontend
+namespace TecnoBlog
 {
     public partial class Startup
     {

@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using TecnoBlog.Frontend.Models;
+using TecnoBlog.Models;
 
-namespace TecnoBlog.Frontend
+namespace TecnoBlog
 {
     public class EmailService : IIdentityMessageService
     {

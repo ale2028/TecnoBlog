@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TecnoBlog.Frontend
+namespace TecnoBlog
 {
     public class BundleConfig
     {
