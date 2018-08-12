@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,22 @@ namespace TecnoBlog.Services.Impl
     public class ArticleService : IModelService<Business.Models.Article>
     {
 
-        private TecnoBlogDataContext database = new TecnoBlogDataContext();
+        private TecnoBlogDataContext database;// = new TecnoBlogDataContext();
+
+
+        public ArticleService()
+        {
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["TECNOBLOGConnectionString"];
+            SqlConnectionStringBuilder builder;
+
+            if (null != settings)
+            {
+                string connection = settings.ConnectionString;
+                builder = new SqlConnectionStringBuilder(connection);
+                database = new TecnoBlogDataContext(builder.ConnectionString);
+            }
+        }
+
 
         /// <summary>
         /// 
@@ -20,8 +37,10 @@ namespace TecnoBlog.Services.Impl
         /// <returns></returns>
         Business.Models.Article IModelService<Business.Models.Article>.Create(Business.Models.Article model)
         {
+
             try
             {
+                // admin@example.com
                 // Le generamos un id único al nuevo articulo
                 model.Id = Guid.NewGuid();
                 // Insertamos datos en la base de datos
@@ -33,6 +52,7 @@ namespace TecnoBlog.Services.Impl
             catch (Exception e)
             {
                 Console.Out.WriteLine(e.Message);
+                Console.Out.WriteLine(e.StackTrace);
             } // CATCH ENDS
             return null;
         } // CREATE ENDS ------------------------------------------------------ //
