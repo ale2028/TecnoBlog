@@ -21,7 +21,7 @@ namespace TecnoBlog.Controllers
         // el tipo de modelo que va a manejar este controlador. Y lo inicializamos
         // con una instancia del servicio que implementa esta interfaz con este model
         // en específico. 
-        private IModelService<Business.Models.Article> articleService = new ArticleService();
+        private IModelService<Business.Models.Article, Guid> articleService = new ArticleService();
 
         // GET: Article
         public ActionResult Index()
@@ -44,6 +44,7 @@ namespace TecnoBlog.Controllers
 
         // GET: Article/Create
         [Authorize]
+        [ValidateInput(false)]
         public ActionResult Create()
         {
             return View();
@@ -52,6 +53,7 @@ namespace TecnoBlog.Controllers
         // POST: Article/Create
         [HttpPost]
         [Authorize]
+        [ValidateInput(false)]
         public ActionResult Create(Business.Models.Article model)
         {
             try
@@ -94,12 +96,13 @@ namespace TecnoBlog.Controllers
         {
             try
             {
-                if (ModelState.IsValid) {
+                if (ModelState.IsValid)
+                {
                     this.articleService.Update(id, model);
                     return RedirectToAction("Index");
                 }
                 return View(model);
-                
+
             }
             catch
             {

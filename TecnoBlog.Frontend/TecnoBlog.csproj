@@ -194,7 +194,6 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -243,7 +242,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -274,12 +272,21 @@
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Delete.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Tag\Details.cshtml" />
+    <Content Include="Views\Tag\Create.cshtml" />
+    <Content Include="Views\Tag\Edit.cshtml" />
+    <Content Include="Views\Tag\Delete.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Image\" />
-    <Folder Include="Views\Tag\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

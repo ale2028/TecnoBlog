@@ -18,7 +18,7 @@ namespace TecnoBlog.Controllers
         // el tipo de modelo que va a manejar este controlador. Y lo inicializamos
         // con una instancia del servicio que implementa esta interfaz con este model
         // en específico. 
-        private IModelService<Business.Models.Comment> commentService = new CommentService();
+        private IModelService<Business.Models.Comment, Guid> commentService = new CommentService();
 
 
         // GET: Comment
@@ -26,9 +26,9 @@ namespace TecnoBlog.Controllers
         {
             List<Business.Models.Comment> model = new List<Business.Models.Comment>();
             var results = this.commentService.Get();
-            foreach (var article in results)
+            foreach (var comment in results)
             {
-                model.Add(article);
+                model.Add(comment);
             }
             return View(model);
         }

@@ -3,21 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TecnoBlog.Business.Models;
+using TecnoBlog.Business.Abstractions;
+using TecnoBlog.Services;
+using TecnoBlog.Services.Impl;
+using TecnoBlog.Services.Converters;
+
 
 namespace TecnoBlog.Controllers
 {
     public class TagController : Controller
     {
+        // La variable es del tipo de la interfaz y usa como parámetro de tipo
+        // el tipo de modelo que va a manejar este controlador. Y lo inicializamos
+        // con una instancia del servicio que implementa esta interfaz con este model
+        // en específico. 
+        private IModelService<Business.Models.Tag , string> tagService = new TagService();
+
         // GET: Tag
         public ActionResult Index()
         {
-            return View();
+            List<Business.Models.Tag> model = new List<Business.Models.Tag>();
+            var results = this.tagService.Get();
+            foreach (var tag in results)
+            {
+                model.Add(tag);
+            }
+            return View(model);
         }
 
         // GET: Tag/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string name)
         {
-            return View();
+            var model = this.tagService.Get(name);
+            return View(model);
         }
 
         // GET: Tag/Create
@@ -28,35 +47,56 @@ namespace TecnoBlog.Controllers
 
         // POST: Tag/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Business.Models.Tag model)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var newTag = this.tagService.Create(model);
+                    if (newTag != null && newTag.Name != string.Empty)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError(null, "Unable to create a new tag. Please try again.");
+                    return View(model);
+                }
+                else
+                {
+                    // Si entra acá es porque alguno de los campos requeridos no está presente
+                    // entonces volvemos a mostrar la vista y pasamos el modelo.
+                    return View(model);
+                }
 
-                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return View(model);
             }
         }
 
         // GET: Tag/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var model = this.tagService.Get(id);
+            ViewBag.tag = model.Name;
+            return View(model);
         }
 
         // POST: Tag/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, Business.Models.Tag model)
         {
+            ViewBag.tag = id;
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    this.tagService.Update(id, model);
+                    return RedirectToAction("Index");
+                }
+                return View(model);
 
-                return RedirectToAction("Index");
             }
             catch
             {
@@ -64,20 +104,21 @@ namespace TecnoBlog.Controllers
             }
         }
 
-        // GET: Tag/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Article/Delete/5
+        public ActionResult Delete(string name)
         {
-            return View();
+            var model = this.tagService.Get(name);
+            return View(model);
         }
 
-        // POST: Tag/Delete/5
+        // POST: Article/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string name, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
 
+                this.tagService.Delete(name);
                 return RedirectToAction("Index");
             }
             catch

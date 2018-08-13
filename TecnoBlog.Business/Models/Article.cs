@@ -28,7 +28,7 @@ namespace TecnoBlog.Business.Models
 
         [Required]
         [Display(Name = "Content")]
-        [DataType(DataType.Html)]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
     }
 }

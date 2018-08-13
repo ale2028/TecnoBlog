@@ -25,7 +25,7 @@ namespace TecnoBlog.Services.Tests.Converters.UserConverter_Tests
         {
             var model = new Business.Models.User
             {
-                Email = "Test Email",
+                Email = "hola@adios.com",
                 UserName = "Test UserName",
                 Id = "Test Id"
                 
@@ -37,7 +37,7 @@ namespace TecnoBlog.Services.Tests.Converters.UserConverter_Tests
         {
             var model = new TecnoBlog.Services.AspNetUsers
             {
-                Email = "Test Email",
+                Email = "hola@adios.com",
                 UserName = "Test UserName",
                 Id = "Test Id"
 
@@ -96,7 +96,7 @@ namespace TecnoBlog.Services.Tests.Converters.UserConverter_Tests
         {
             // Prepare
             var entity = GenerateUserEntity();
-            var expected = "Test Email";
+            var expected = "hola@adios.com";
 
             // Act
             var actual = UserConverter.Convert(entity).Email;
@@ -116,7 +116,7 @@ namespace TecnoBlog.Services.Tests.Converters.UserConverter_Tests
         {
             // Prepare
             var model = GenerateUserModel();
-            var expected = "Test Email";
+            var expected = "hola@adios.com";
 
             // Act
             var actual = UserConverter.Convert(model).Email;

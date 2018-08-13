@@ -11,7 +11,7 @@ using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Services.Impl
 {
-    public class ImageService : IModelService<Business.Models.Image>
+    public class ImageService : IModelService<Business.Models.Image, Guid>
     {
         private TecnoBlogDataContext database;
 
@@ -33,7 +33,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Business.Models.Image IModelService<Business.Models.Image>.Create(Business.Models.Image model)
+        Business.Models.Image IModelService<Business.Models.Image, Guid>.Create(Business.Models.Image model)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Image>.Delete(Guid modelId)
+        bool IModelService<Business.Models.Image, Guid>.Delete(Guid modelId)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        Business.Models.Image IModelService<Business.Models.Image>.Get(Guid modelId)
+        Business.Models.Image IModelService<Business.Models.Image, Guid>.Get(Guid modelId)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace TecnoBlog.Services.Impl
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Business.Models.Image> IModelService<Business.Models.Image>.Get()
+        IEnumerable<Business.Models.Image> IModelService<Business.Models.Image, Guid>.Get()
         {
             // La lista de imagenes
             List<Business.Models.Image> results = new List<Business.Models.Image>();
@@ -145,7 +145,7 @@ namespace TecnoBlog.Services.Impl
         /// <param name="modelId"></param>
         /// <param name="newState"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Image>.Update(Guid modelId, Business.Models.Image newState)
+        bool IModelService<Business.Models.Image, Guid>.Update(Guid modelId, Business.Models.Image newState)
         {
             try
             {

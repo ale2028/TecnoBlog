@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TecnoBlog.Business.Abstractions
 {
-    public interface IModelService<T> where T:class
+    public interface IModelService<T, Q> where T:class
     {
         /// <summary>
         ///     Obtiene una única instancia de T que se encuentra persistida en la base de datos
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        T Get(Guid modelId);
+        T Get(Q modelId);
 
         /// <summary>
         ///     Recupera todos los elementos en la base de datos de un tipo determinado
@@ -34,13 +34,13 @@ namespace TecnoBlog.Business.Abstractions
         /// <param name="modelId"></param>
         /// <param name="newState"></param>
         /// <returns></returns>
-        bool Update(Guid modelId, T newState);
+        bool Update(Q modelId, T newState);
 
         /// <summary>
         ///     Elimina modelos que han sido previamente persistidos en la base de datos. 
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        bool Delete(Guid modelId);
+        bool Delete(Q modelId);
     }
 }

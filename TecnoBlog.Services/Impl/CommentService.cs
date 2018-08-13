@@ -11,7 +11,7 @@ using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Services.Impl
 {
-    public class CommentService : IModelService<Business.Models.Comment>
+    public class CommentService : IModelService<Business.Models.Comment, Guid>
     {
         private TecnoBlogDataContext database;
 
@@ -33,7 +33,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Business.Models.Comment IModelService<Business.Models.Comment>.Create(Business.Models.Comment model)
+        Business.Models.Comment IModelService<Business.Models.Comment, Guid>.Create(Business.Models.Comment model)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Comment>.Delete(Guid modelId)
+        bool IModelService<Business.Models.Comment, Guid>.Delete(Guid modelId)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        Business.Models.Comment IModelService<Business.Models.Comment>.Get(Guid modelId)
+        Business.Models.Comment IModelService<Business.Models.Comment, Guid>.Get(Guid modelId)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace TecnoBlog.Services.Impl
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Business.Models.Comment> IModelService<Business.Models.Comment>.Get()
+        IEnumerable<Business.Models.Comment> IModelService<Business.Models.Comment, Guid>.Get()
         {
             // La lista de comentarios 
             List<Business.Models.Comment> results = new List<Business.Models.Comment>();
@@ -145,7 +145,7 @@ namespace TecnoBlog.Services.Impl
         /// <param name="modelId"></param>
         /// <param name="newState"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Comment>.Update(Guid modelId, Business.Models.Comment newState)
+        bool IModelService<Business.Models.Comment, Guid>.Update(Guid modelId, Business.Models.Comment newState)
         {
             try
             {

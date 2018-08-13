@@ -10,7 +10,7 @@ using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Services.Impl
 {
-    public class ArticleService : IModelService<Business.Models.Article>
+    public class ArticleService : IModelService<Business.Models.Article, Guid>
     {
 
         private TecnoBlogDataContext database;
@@ -35,7 +35,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Business.Models.Article IModelService<Business.Models.Article>.Create(Business.Models.Article model)
+        Business.Models.Article IModelService<Business.Models.Article, Guid>.Create(Business.Models.Article model)
         {
 
             try
@@ -62,7 +62,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Article>.Delete(Guid modelId)
+        bool IModelService<Business.Models.Article, Guid>.Delete(Guid modelId)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        Business.Models.Article IModelService<Business.Models.Article>.Get(Guid modelId)
+        Business.Models.Article IModelService<Business.Models.Article, Guid>.Get(Guid modelId)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace TecnoBlog.Services.Impl
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Business.Models.Article> IModelService<Business.Models.Article>.Get()
+        IEnumerable<Business.Models.Article> IModelService<Business.Models.Article, Guid>.Get()
         {
             // La lista de articulos
             List<Business.Models.Article> results = new List<Business.Models.Article>();
@@ -150,7 +150,7 @@ namespace TecnoBlog.Services.Impl
         /// <param name="modelId"></param>
         /// <param name="newState"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Article>.Update(Guid modelId, Business.Models.Article newState)
+        bool IModelService<Business.Models.Article, Guid>.Update(Guid modelId, Business.Models.Article newState)
         {
             try
             {
