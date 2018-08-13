@@ -13,7 +13,7 @@ namespace TecnoBlog.Services.Impl
     public class ArticleService : IModelService<Business.Models.Article>
     {
 
-        private TecnoBlogDataContext database;// = new TecnoBlogDataContext();
+        private TecnoBlogDataContext database;
 
 
         public ArticleService()

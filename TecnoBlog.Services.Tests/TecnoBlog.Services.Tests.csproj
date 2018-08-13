@@ -50,6 +50,9 @@
   <ItemGroup>
     <Compile Include="Converters\ArticleConverter_Tests\Convert.cs" />
     <Compile Include="Converters\CommentConverter_Tests\Convert.cs" />
+    <Compile Include="Converters\ImageConverter_Tests\Convert.cs" />
+    <Compile Include="Converters\TagConverter_Tests\Convert.cs" />
+    <Compile Include="Converters\UserConverter_Tests\Convert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

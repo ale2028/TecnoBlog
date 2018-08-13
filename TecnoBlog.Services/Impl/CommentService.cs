@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +11,23 @@ using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Services.Impl
 {
-    class CommentService : IModelService<Business.Models.Comment>
+    public class CommentService : IModelService<Business.Models.Comment>
     {
-        private TecnoBlogDataContext database = new TecnoBlogDataContext();
+        private TecnoBlogDataContext database;
+
+        public CommentService()
+        {
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["TECNOBLOGConnectionString"];
+            SqlConnectionStringBuilder builder;
+
+            if (null != settings)
+            {
+                string connection = settings.ConnectionString;
+                builder = new SqlConnectionStringBuilder(connection);
+                database = new TecnoBlogDataContext(builder.ConnectionString);
+            }
+        } // ------------------------------------------------------------------ // 
+
         /// <summary>
         /// 
         /// </summary>
