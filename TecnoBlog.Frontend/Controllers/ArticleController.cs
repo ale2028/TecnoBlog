@@ -22,6 +22,8 @@ namespace TecnoBlog.Controllers
         // con una instancia del servicio que implementa esta interfaz con este model
         // en específico. 
         private IModelService<Business.Models.Article, Guid> articleService = new ArticleService();
+        private IModelService<Business.Models.Tag, string> tagService = new TagService();
+        private IModelService<Business.Models.ArticleTag, Guid> articleTagService = new ArticleTagService();
 
         // GET: Article
         public ActionResult Index()
@@ -54,16 +56,24 @@ namespace TecnoBlog.Controllers
         [HttpPost]
         [Authorize]
         [ValidateInput(false)]
-        public ActionResult Create(Business.Models.Article model)
+        public ActionResult Create(Business.Models.Article model, string tags)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    var tagList = tags.Split(',');
+                    foreach (var tag in tagList) {
+                        this.tagService.Create(new Business.Models.Tag { Name = tag.ToUpper() });
+                    }
                     model.Created = DateTime.Now;
                     model.Author = User.Identity.Name;
                     var newArticle = this.articleService.Create(model);
                     if (newArticle != null && newArticle.Id != Guid.Empty) {
+                        foreach (var tag in tagList)
+                        {
+                            this.articleTagService.Create(new ArticleTag { Tag = tag.ToUpper(), ArticleId = newArticle.Id });
+                        }
                         return RedirectToAction("Index");
                     }
                     ModelState.AddModelError(null, "Unable to create a new article. Please try again.");

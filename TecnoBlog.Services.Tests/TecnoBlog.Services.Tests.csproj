@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\ArticleConverter_Tests\Convert.cs" />
+    <Compile Include="Converters\ArticleTagConverter_Tests\Convert.cs" />
     <Compile Include="Converters\CommentConverter_Tests\Convert.cs" />
     <Compile Include="Converters\ImageConverter_Tests\Convert.cs" />
     <Compile Include="Converters\TagConverter_Tests\Convert.cs" />
