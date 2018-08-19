@@ -50,6 +50,7 @@
     <Compile Include="Converters\ArticleTagConverter.cs" />
     <Compile Include="Converters\TagConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Impl\ArticleCommentService.cs" />
     <Compile Include="Impl\ArticleService.cs" />
     <Compile Include="Impl\ArticleTagService.cs" />
     <Compile Include="Impl\CommentService.cs" />

@@ -19,17 +19,16 @@ namespace TecnoBlog.Controllers
         // con una instancia del servicio que implementa esta interfaz con este model
         // en específico. 
         private IModelService<Business.Models.Comment, Guid> commentService = new CommentService();
+        private ArticleCommentService articleCommentService = new ArticleCommentService();
 
-
-        // GET: Comment
-        public ActionResult Index()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        public ActionResult Index(Guid articleId)
         {
-            List<Business.Models.Comment> model = new List<Business.Models.Comment>();
-            var results = this.commentService.Get();
-            foreach (var comment in results)
-            {
-                model.Add(comment);
-            }
+            List<Business.Models.Comment> model = this.articleCommentService.GetCommentsForArticle(articleId);
             return View(model);
         }
 
@@ -41,15 +40,21 @@ namespace TecnoBlog.Controllers
         }
 
         // GET: Comment/Create
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult Create(Guid articleId)
         {
-            return View();
+            Business.Models.Comment model = new Business.Models.Comment();
+            model.ArticleId = articleId;
+            return View(model);
         }
 
         // POST: Comment/Create
         [HttpPost]
-        public ActionResult Create(Business.Models.Comment model)
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult PostComment(Business.Models.Comment model)
         {
+            ViewBag.ArticleId = model.ArticleId;
             try
             {
                 if (ModelState.IsValid)
@@ -59,22 +64,22 @@ namespace TecnoBlog.Controllers
                     var newComment = this.commentService.Create(model);
                     if (newComment != null && newComment.Id != Guid.Empty)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Details", "Article", new { id = model.ArticleId });
                     }
                     ModelState.AddModelError(null, "Unable to create a new comment. Please try again.");
-                    return View(model);
+                    return RedirectToAction("Details", "Article",  new { id = model.ArticleId});
                 }
                 else
                 {
                     // Si entra acá es porque alguno de los campos requeridos no está presente
                     // entonces volvemos a mostrar la vista y pasamos el modelo.
-                    return View(model);
+                    return RedirectToAction("Details", "Article", new { id = model.ArticleId });
                 }
 
             }
             catch (Exception e)
             {
-                return View(model);
+                return RedirectToAction("Details", "Article", new { id = model.ArticleId });
             }
 
         }

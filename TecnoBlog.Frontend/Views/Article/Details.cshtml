@@ -39,8 +39,21 @@
     <br />
     <br />
     @Html.Raw(Model.Content)
+    <div name="comments" style="padding: 3em;">
+        <hr />
+        <h3>Comments</h3>
+        <br />
+        @Html.Action("Index", "Comment", new { articleId = Model.Id })
+        <hr />
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.Action("Create", "Comment", new { articleId = Model.Id })
+        }
+    </div>
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
