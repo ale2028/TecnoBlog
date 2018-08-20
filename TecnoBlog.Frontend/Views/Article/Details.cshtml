@@ -33,9 +33,17 @@
         <dd>
             @Html.Raw(Model.Description)
         </dd>
+
+        <dt>
+            Tags
+        </dt>
+
+        <dd>
+            @Html.Action("Index", "Tag", new { articleId = Model.Id })
+        </dd>
     </dl>
     <hr />
-    <img src="https://fixmywp.com/wp-content/uploads/2017/01/website-hacked.jpg" width="100%" />
+    <img src="https://www.elstonallsaints.notts.sch.uk/_images/397437_l.jpg" width="100%" />
     <br />
     <br />
     @Html.Raw(Model.Content)

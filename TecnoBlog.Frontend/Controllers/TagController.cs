@@ -19,9 +19,21 @@ namespace TecnoBlog.Controllers
         // con una instancia del servicio que implementa esta interfaz con este model
         // en específico. 
         private IModelService<Business.Models.Tag , string> tagService = new TagService();
+        private TagQueryService tagQueryService = new TagQueryService();
 
         // GET: Tag
-        public ActionResult Index()
+        public ActionResult Index(Guid articleId)
+        {
+            List<Business.Models.Tag> model = new List<Business.Models.Tag>();
+            var results = this.tagQueryService.GetTagsForArticle(articleId);
+            foreach (var tag in results)
+            {
+                model.Add(new Business.Models.Tag { Name = tag });
+            }
+            return View(model);
+        }
+
+        public ActionResult All()
         {
             List<Business.Models.Tag> model = new List<Business.Models.Tag>();
             var results = this.tagService.Get();
@@ -33,10 +45,10 @@ namespace TecnoBlog.Controllers
         }
 
         // GET: Tag/Details/5
-        public ActionResult Details(string name)
+        public ActionResult ArticlesByTag(string tag)
         {
-            var model = this.tagService.Get(name);
-            return View(model);
+            var results = this.tagQueryService.GetArticlesByTag(tag);
+            return View(results);
         }
 
         // GET: Tag/Create
