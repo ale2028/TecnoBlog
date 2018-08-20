@@ -9,7 +9,7 @@ namespace TecnoBlog.Business.Models
     public class Tag
     {
 
-        [Required]
+        [Required(ErrorMessage = "The email is mandatory*")]
         [Display(Name = "Name")]
         [DataType(DataType.Text)]
         public string Name { set; get; }

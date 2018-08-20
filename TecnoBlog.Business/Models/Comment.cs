@@ -13,7 +13,7 @@ namespace TecnoBlog.Business.Models
         public string UserName { get; set; }
         public DateTime Created { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The content is mandatory*")]
         [Display(Name = "Content")]
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }

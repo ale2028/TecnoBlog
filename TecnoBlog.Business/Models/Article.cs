@@ -16,17 +16,17 @@ namespace TecnoBlog.Business.Models
 
         public DateTime Created { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The title is mandatory*")]
         [Display(Name = "Title")]
         [DataType(DataType.Text)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The description is mandatory*")]
         [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The content is mandatory*")]
         [Display(Name = "Content")]
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }

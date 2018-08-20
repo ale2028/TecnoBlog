@@ -10,12 +10,12 @@ namespace TecnoBlog.Business.Models
     {
         public string Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The email is mandatory*")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The username is mandatory*")]
         [Display(Name = "UserName")]
         [DataType(DataType.Text)]
         public string UserName { get; set; }

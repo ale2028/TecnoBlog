@@ -26,7 +26,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Create Article", "Create", "Article")</li>
+                    <li> @Html.ActionLink("Manage Articles", "Index", "Article") </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Alejanrra Alvarez </p>
+            <p>&copy; @DateTime.Now.Year - Alejandra Álvarez </p>
         </footer>
     </div>
 
