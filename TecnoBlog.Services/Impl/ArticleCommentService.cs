@@ -14,15 +14,8 @@ namespace TecnoBlog.Services.Impl
         private TecnoBlogDataContext database;
         public ArticleCommentService()
         {
-            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["TECNOBLOGConnectionString"];
-            SqlConnectionStringBuilder builder;
+            this.database = DataContextFactory.GetContext(); 
 
-            if (null != settings)
-            {
-                string connection = settings.ConnectionString;
-                builder = new SqlConnectionStringBuilder(connection);
-                database = new TecnoBlogDataContext(builder.ConnectionString);
-            }
         } // CONSTRUCTOR ENDS ------------------------------------------------- //
 
         /// <summary>

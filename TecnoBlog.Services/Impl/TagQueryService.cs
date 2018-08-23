@@ -13,16 +13,9 @@ namespace TecnoBlog.Services.Impl
     {
         private TecnoBlogDataContext database;
 
-        public TagQueryService() {
-            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["TECNOBLOGConnectionString"];
-            SqlConnectionStringBuilder builder;
-
-            if (null != settings)
-            {
-                string connection = settings.ConnectionString;
-                builder = new SqlConnectionStringBuilder(connection);
-                database = new TecnoBlogDataContext(builder.ConnectionString);
-            }
+        public TagQueryService()
+        {
+            this.database = DataContextFactory.GetContext();
         }
 
         public IEnumerable<Business.Models.Article> GetArticlesByTag(string tag)

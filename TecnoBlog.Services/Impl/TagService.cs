@@ -17,15 +17,7 @@ namespace TecnoBlog.Services.Impl
 
         public TagService()
         {
-            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["TECNOBLOGConnectionString"];
-            SqlConnectionStringBuilder builder;
-
-            if (null != settings)
-            {
-                string connection = settings.ConnectionString;
-                builder = new SqlConnectionStringBuilder(connection);
-                database = new TecnoBlogDataContext(builder.ConnectionString);
-            }
+            this.database = DataContextFactory.GetContext();
         }
 
         /// <summary>
