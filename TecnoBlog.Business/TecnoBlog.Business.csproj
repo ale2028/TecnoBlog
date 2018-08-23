@@ -48,6 +48,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\ArticleTag.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

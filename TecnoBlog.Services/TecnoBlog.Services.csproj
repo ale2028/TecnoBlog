@@ -42,16 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticleRepository.cs" />
-    <Compile Include="CommentRepository.cs" />
     <Compile Include="Converters\ArticleConverter.cs" />
     <Compile Include="Converters\CommentConverter.cs" />
     <Compile Include="Converters\ImageConverter.cs" />
+    <Compile Include="Converters\ArticleTagConverter.cs" />
     <Compile Include="Converters\TagConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
+    <Compile Include="Impl\ArticleCommentService.cs" />
     <Compile Include="Impl\ArticleService.cs" />
+    <Compile Include="Impl\ArticleTagService.cs" />
     <Compile Include="Impl\CommentService.cs" />
+    <Compile Include="Impl\DataContextFactory.cs" />
     <Compile Include="Impl\ImageService.cs" />
+    <Compile Include="Impl\TagQueryService.cs" />
     <Compile Include="Impl\TagService.cs" />
     <Compile Include="Impl\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

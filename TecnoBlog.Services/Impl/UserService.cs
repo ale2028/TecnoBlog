@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +11,21 @@ using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Services.Impl
 {
-    class UserService : IModelService<Business.Models.User>
+    public class UserService : IModelService<Business.Models.User, string>
     {
-        private TecnoBlogDataContext database = new TecnoBlogDataContext();
+        private TecnoBlogDataContext database;
+
+        public UserService()
+        {
+            this.database = DataContextFactory.GetContext();
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        User IModelService<User>.Create(User model)
+        User IModelService<User, string>.Create(User model)
         {
             return null;    
         } //  CREATE ENDS ----------------------------------------------------- //
@@ -28,7 +35,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        bool IModelService<User>.Delete(Guid modelId)
+        bool IModelService<User, string>.Delete(string modelId)
         {
             return false; 
         } // DELETE ----------------------------------------------------------- //
@@ -38,7 +45,7 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        User IModelService<User>.Get(Guid modelId)
+        User IModelService<User, string>.Get(string modelId)
         {
             try
             {
@@ -65,7 +72,7 @@ namespace TecnoBlog.Services.Impl
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<User> IModelService<User>.Get()
+        IEnumerable<User> IModelService<User, string>.Get()
         {
             // La lista de usuarios
             List<Business.Models.User> results = new List<Business.Models.User>();
@@ -95,7 +102,7 @@ namespace TecnoBlog.Services.Impl
         /// <param name="modelId"></param>
         /// <param name="newState"></param>
         /// <returns></returns>
-        bool IModelService<User>.Update(Guid modelId, User newState)
+        bool IModelService<User, string>.Update(string modelId, User newState)
         {
             return false; 
         } // UPDATE ----------------------------------------------------------- //

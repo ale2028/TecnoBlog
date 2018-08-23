@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+<hr />
 <div>
-    <h4>Article</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Author)
@@ -27,33 +25,43 @@
             @Html.DisplayFor(model => model.Created)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.Raw(Model.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Content)
+            Tags
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content)
+            @Html.Action("Index", "Tag", new { articleId = Model.Id })
         </dd>
-
     </dl>
+    <hr />
+    <img src="https://www.elstonallsaints.notts.sch.uk/_images/397437_l.jpg" width="100%" />
+    <br />
+    <br />
+    @Html.Raw(Model.Content)
+    <div name="comments" style="padding: 3em;">
+        <hr />
+        <h3>Comments</h3>
+        <br />
+        @Html.Action("Index", "Comment", new { articleId = Model.Id })
+        <hr />
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.Action("Create", "Comment", new { articleId = Model.Id })
+        }
+    </div>
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Home")
 </p>
+

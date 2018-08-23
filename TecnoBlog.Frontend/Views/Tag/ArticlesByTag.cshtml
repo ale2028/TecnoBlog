@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TecnoBlog.Business.Models.Article>
+
+@{
+    ViewBag.Title = "ArticlesByTag";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Action("All", "Tag")
+
+@foreach (var item in Model)
+{
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>@Html.DisplayFor(modelItem => item.Title)</strong> by <strong>@Html.DisplayFor(modelItem => item.Author)</strong> at <strong>@Html.DisplayFor(modelItem => item.Created)</strong>
+        </div>
+        <img src="https://ars.com.ve/wp-content/uploads/2017/03/BANNER-SISTEMASTECNOLOGIA-ARSERVICIOS.jpg" width="100%" />
+        <div class="panel-body" style="color:white;">
+            <div class="col-lg-12">
+                <h4>Description</h4>
+                <hr />
+                @Html.Raw(item.Description)
+                <hr />
+                <a href="@Url.Action("Details", "Article", new { id=item.Id})" class="btn btn-primary">Read More</a>
+            </div>
+
+        </div>
+    </div>
+}

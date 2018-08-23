@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoBlog", "TecnoBlog.Frontend\TecnoBlog.csproj", "{0A4C59A1-242A-4203-A466-050F8D92EC00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TecnoBlog.Frontend.Tests", "TecnoBlog.Frontend.Tests\TecnoBlog.Frontend.Tests.csproj", "{5C885C25-E0A8-46BD-AD66-198A67A396E8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62B8933A-6789-430C-B508-BD375E2E4458}"
 	ProjectSection(SolutionItems) = preProject
 		Database\TrcnoBlog-db.sql = Database\TrcnoBlog-db.sql
@@ -28,10 +26,6 @@ Global
 		{0A4C59A1-242A-4203-A466-050F8D92EC00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A4C59A1-242A-4203-A466-050F8D92EC00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A4C59A1-242A-4203-A466-050F8D92EC00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C885C25-E0A8-46BD-AD66-198A67A396E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C885C25-E0A8-46BD-AD66-198A67A396E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C885C25-E0A8-46BD-AD66-198A67A396E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C885C25-E0A8-46BD-AD66-198A67A396E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A612B5F-F556-4829-8E4B-7D6C67EC86D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A612B5F-F556-4829-8E4B-7D6C67EC86D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A612B5F-F556-4829-8E4B-7D6C67EC86D7}.Release|Any CPU.ActiveCfg = Release|Any CPU

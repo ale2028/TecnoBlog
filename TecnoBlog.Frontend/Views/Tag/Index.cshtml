@@ -1,0 +1,15 @@
+﻿@model IEnumerable<TecnoBlog.Business.Models.Tag>
+<p>
+    @foreach (var item in Model)
+    {
+
+        <span class="label label-info">
+            @item.Name.ToUpper()
+        </span>
+        <span>&nbsp; &nbsp;</span>
+        
+
+    }
+</p>
+
+

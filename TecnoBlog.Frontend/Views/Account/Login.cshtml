@@ -2,6 +2,8 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Iniciar sesión";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -52,9 +54,6 @@
         </section>
     </div>
     <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
     </div>
 </div>
 

@@ -1,0 +1,24 @@
+﻿@model TecnoBlog.Business.Models.Comment
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Leave a comment</div>
+    <div class="panel-body">
+        @using (Html.BeginForm("PostComment", "Comment"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ArticleId)
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            <br />
+            <br />
+            <input type="submit" value="Create" class="btn btn-primary pull-right" />
+        }
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

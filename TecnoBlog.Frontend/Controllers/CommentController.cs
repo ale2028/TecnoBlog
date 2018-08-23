@@ -3,60 +3,107 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TecnoBlog.Business.Abstractions;
+using TecnoBlog.Business.Models;
+using TecnoBlog.Services;
+using TecnoBlog.Services.Impl;
+using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Controllers
 {
     public class CommentController : Controller
     {
-        // GET: Comment
-        public ActionResult Index()
+
+        // La variable es del tipo de la interfaz y usa como parámetro de tipo
+        // el tipo de modelo que va a manejar este controlador. Y lo inicializamos
+        // con una instancia del servicio que implementa esta interfaz con este model
+        // en específico. 
+        private IModelService<Business.Models.Comment, Guid> commentService = new CommentService();
+        private ArticleCommentService articleCommentService = new ArticleCommentService();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        public ActionResult Index(Guid articleId)
         {
-            return View();
+            List<Business.Models.Comment> model = this.articleCommentService.GetCommentsForArticle(articleId);
+            return View(model);
         }
 
         // GET: Comment/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var model = this.commentService.Get(id);
+            return View(model);
         }
 
         // GET: Comment/Create
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult Create(Guid articleId)
         {
-            return View();
+            Business.Models.Comment model = new Business.Models.Comment();
+            model.ArticleId = articleId;
+            return View(model);
         }
 
         // POST: Comment/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult PostComment(Business.Models.Comment model)
         {
+            ViewBag.ArticleId = model.ArticleId;
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    model.Created = DateTime.Now;
+                    model.UserName = User.Identity.Name;
+                    var newComment = this.commentService.Create(model);
+                    if (newComment != null && newComment.Id != Guid.Empty)
+                    {
+                        return RedirectToAction("Details", "Article", new { id = model.ArticleId });
+                    }
+                    ModelState.AddModelError(null, "Unable to create a new comment. Please try again.");
+                    return RedirectToAction("Details", "Article",  new { id = model.ArticleId});
+                }
+                else
+                {
+                    // Si entra acá es porque alguno de los campos requeridos no está presente
+                    // entonces volvemos a mostrar la vista y pasamos el modelo.
+                    return RedirectToAction("Details", "Article", new { id = model.ArticleId });
+                }
 
-                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Details", "Article", new { id = model.ArticleId });
             }
+
         }
 
         // GET: Comment/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = this.commentService.Get(id);
+            return View(model);
         }
 
         // POST: Comment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, Business.Models.Comment model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    this.commentService.Update(id, model);
+                    return RedirectToAction("Index");
+                }
+                return View(model);
 
-                return RedirectToAction("Index");
             }
             catch
             {
@@ -65,19 +112,20 @@ namespace TecnoBlog.Controllers
         }
 
         // GET: Comment/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = this.commentService.Get(id);
+            return View(model);
         }
 
         // POST: Comment/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
 
+                this.commentService.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
@@ -85,5 +133,6 @@ namespace TecnoBlog.Controllers
                 return View();
             }
         }
+
     }
 }

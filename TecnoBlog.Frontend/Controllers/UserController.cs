@@ -3,38 +3,101 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TecnoBlog.Business.Models;
+using TecnoBlog.Business.Abstractions;
+using TecnoBlog.Services;
+using TecnoBlog.Services.Impl;
+using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
+
+        // La variable es del tipo de la interfaz y usa como parámetro de tipo
+        // el tipo de modelo que va a manejar este controlador. Y lo inicializamos
+        // con una instancia del servicio que implementa esta interfaz con este model
+        // en específico. 
+        private IModelService<Business.Models.User, string> userService = new UserService();
+
+        // GET: Article
         public ActionResult Index()
         {
-            return View();
+            List<Business.Models.User> model = new List<Business.Models.User>();
+            var results = this.userService.Get();
+            foreach (var user in results)
+            {
+                model.Add(user);
+            }
+            return View(model);
         }
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
+        // GET: Article/Details/5
+        public ActionResult Details(string id)
         {
-            return View();
+            var model = this.userService.Get(id);
+            return View(model);
         }
 
-        // GET: User/Create
+        // GET: Article/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: User/Create
+
+        // POST: Article/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [Authorize]
+        public ActionResult Create(Business.Models.User model)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var newUser = this.userService.Create(model);
+                    if (newUser != null && newUser.Id != string.Empty)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError(null, "Unable to create a new User. Please try again.");
+                    return View(model);
+                }
+                else
+                {
+                    // Si entra acá es porque alguno de los campos requeridos no está presente
+                    // entonces volvemos a mostrar la vista y pasamos el modelo.
+                    return View(model);
+                }
 
-                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return View(model);
+            }
+        }
+
+        // GET: Article/Edit/5
+        public ActionResult Edit(string id)
+        {
+            var model = this.userService.Get(id);
+            return View(model);
+        }
+
+        // POST: Comment/Edit/5
+        [HttpPost]
+        public ActionResult Edit(string id, Business.Models.User model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    this.userService.Update(id, model);
+                    return RedirectToAction("Index");
+                }
+                return View(model);
+
             }
             catch
             {
@@ -42,42 +105,20 @@ namespace TecnoBlog.Controllers
             }
         }
 
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Article/Delete/5
+        public ActionResult Delete(string id)
         {
-            return View();
+            var model = this.userService.Get(id);
+            return View(model);
         }
 
-        // POST: User/Edit/5
+        // POST: Article/Delete/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
+                this.userService.Delete(id);
                 return RedirectToAction("Index");
             }
             catch

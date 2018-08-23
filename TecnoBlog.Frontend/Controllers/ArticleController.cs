@@ -21,7 +21,9 @@ namespace TecnoBlog.Controllers
         // el tipo de modelo que va a manejar este controlador. Y lo inicializamos
         // con una instancia del servicio que implementa esta interfaz con este model
         // en específico. 
-        private IModelService<Business.Models.Article> articleService = new ArticleService();
+        private IModelService<Business.Models.Article, Guid> articleService = new ArticleService();
+        private IModelService<Business.Models.Tag, string> tagService = new TagService();
+        private IModelService<Business.Models.ArticleTag, Guid> articleTagService = new ArticleTagService();
 
         // GET: Article
         public ActionResult Index()
@@ -44,6 +46,7 @@ namespace TecnoBlog.Controllers
 
         // GET: Article/Create
         [Authorize]
+        [ValidateInput(false)]
         public ActionResult Create()
         {
             return View();
@@ -52,16 +55,25 @@ namespace TecnoBlog.Controllers
         // POST: Article/Create
         [HttpPost]
         [Authorize]
-        public ActionResult Create(Business.Models.Article model)
+        [ValidateInput(false)]
+        public ActionResult Create(Business.Models.Article model, string tags)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    var tagList = tags.Split(',');
+                    foreach (var tag in tagList) {
+                        this.tagService.Create(new Business.Models.Tag { Name = tag.ToUpper() });
+                    }
                     model.Created = DateTime.Now;
                     model.Author = User.Identity.Name;
                     var newArticle = this.articleService.Create(model);
                     if (newArticle != null && newArticle.Id != Guid.Empty) {
+                        foreach (var tag in tagList)
+                        {
+                            this.articleTagService.Create(new ArticleTag { Tag = tag.ToUpper(), ArticleId = newArticle.Id });
+                        }
                         return RedirectToAction("Index");
                     }
                     ModelState.AddModelError(null, "Unable to create a new article. Please try again.");
@@ -94,12 +106,13 @@ namespace TecnoBlog.Controllers
         {
             try
             {
-                if (ModelState.IsValid) {
+                if (ModelState.IsValid)
+                {
                     this.articleService.Update(id, model);
                     return RedirectToAction("Index");
                 }
                 return View(model);
-                
+
             }
             catch
             {

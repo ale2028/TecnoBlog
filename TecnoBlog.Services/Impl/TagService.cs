@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +11,21 @@ using TecnoBlog.Services.Converters;
 
 namespace TecnoBlog.Services.Impl
 {
-    class TagService : IModelService<Business.Models.Tag>
+    public class TagService : IModelService<Business.Models.Tag, string>
     {
-        private TecnoBlogDataContext database = new TecnoBlogDataContext();
+        private TecnoBlogDataContext database;
+
+        public TagService()
+        {
+            this.database = DataContextFactory.GetContext();
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Business.Models.Tag IModelService<Business.Models.Tag>.Create(Business.Models.Tag model)
+        Business.Models.Tag IModelService<Business.Models.Tag, string>.Create(Business.Models.Tag model)
         {
             try
             {
@@ -41,13 +48,13 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Tag>.Delete(Guid modelId)
+        bool IModelService<Business.Models.Tag, string>.Delete(string modelId)
         {
             try
             {
                 // Usamos una consulta LINQ para buscar el artículo en la base de datos
                 var query = from tag in this.database.Tag
-                            where tag.Name == tag.Name
+                            where tag.Name == modelId
                             select tag;
 
                 // Si hay resultados, entonces buscamos el primero y lo devolvemos
@@ -72,13 +79,13 @@ namespace TecnoBlog.Services.Impl
         /// </summary>
         /// <param name="modelId"></param>
         /// <returns></returns>
-        Business.Models.Tag IModelService<Business.Models.Tag>.Get(Guid modelId)
+        Business.Models.Tag IModelService<Business.Models.Tag, string>.Get(string modelId)
         {
             try
             {
                 // Usamos una consulta LINQ para buscar el tag en la base de datos
                 var query = from tag in this.database.Tag
-                            where tag.Name == tag.Name
+                            where tag.Name == modelId
                             select tag;
 
                 // Si hay resultados, entonces buscamos el primero y lo devolvemos
@@ -99,7 +106,7 @@ namespace TecnoBlog.Services.Impl
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Business.Models.Tag> IModelService<Business.Models.Tag>.Get()
+        IEnumerable<Business.Models.Tag> IModelService<Business.Models.Tag, string>.Get()
         {
             // La lista de articulos
             List<Business.Models.Tag> results = new List<Business.Models.Tag>();
@@ -129,13 +136,13 @@ namespace TecnoBlog.Services.Impl
         /// <param name="modelId"></param>
         /// <param name="newState"></param>
         /// <returns></returns>
-        bool IModelService<Business.Models.Tag>.Update(Guid modelId, Business.Models.Tag newState)
+        bool IModelService<Business.Models.Tag, string>.Update(string modelId, Business.Models.Tag newState)
         {
              try
             {
                 // Usamos una consulta LINQ para buscar el artículo en la base de datos
                 var query = from tag in this.database.Tag
-                            where tag.Name == tag.Name
+                            where tag.Name == modelId
                             select tag;
 
                 // Si hay resultados, entonces buscamos el primero y lo devolvemos
